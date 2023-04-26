@@ -59,7 +59,7 @@ body {
 	transition: 0.5s ease;
 }
 
-.navbar a:hover {
+.navbar a:focus {
 	color: var(--color-dark);
 }
 
@@ -86,7 +86,7 @@ body {
 	color: #bbb;
 }
 
-#sendButton {
+.login__btn {
 	font-size: 2.4rem;
 	color: var(--color-primary);
 	cursor: pointer;
@@ -94,7 +94,7 @@ body {
 	transition: 0.5s ease;
 }
 
-#sendButton:hover {
+.login__btn:hover {
 	color: #363949;
 }
 
@@ -102,14 +102,14 @@ body {
 .app {
 	position: relative;
 	max-width: 100rem;
-	margin: 4rem auto;
+	margin: 8rem auto;
 	display: grid;
 	grid-template-columns: 4fr 3fr;
 	grid-template-rows: auto repeat(3, 15rem) auto;
 	gap: 2rem;
 
 	/* NOTE This creates the fade in/out anumation */
-	opacity: 0;
+	/* opacity: 0; */
 	transition: all 1s;
 }
 
@@ -230,14 +230,17 @@ body {
 
 .operation--transfer {
 	background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+	border: 0.1rem solid black;
 }
 
 .operation--loan {
 	background-image: linear-gradient(to top left, #39b385, #9be15d);
+	border: 0.1rem solid black;
 }
 
 .operation--close {
 	background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+	border: 0.1rem solid black;
 }
 
 h2 {
