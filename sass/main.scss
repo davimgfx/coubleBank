@@ -127,6 +127,11 @@ body {
 	color: #888;
 }
 
+.date {
+	font-weight: 800;
+    padding-top: 0.2rem;
+}
+
 .balance__value {
 	font-size: 4.5rem;
 	font-weight: 400;
@@ -291,10 +296,10 @@ h2 {
 	background-color: #fff;
 	cursor: pointer;
 	transition: all 0.3s;
-    &:focus{
-        outline: none;
-	    background-color: rgba(255, 255, 255, 0.8);
-    }
+	&:focus {
+		outline: none;
+		background-color: rgba(255, 255, 255, 0.8);
+	}
 }
 
 .logout-timer {

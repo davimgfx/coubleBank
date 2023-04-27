@@ -1,9 +1,23 @@
 "use strict";
+//Day actually
+const currentDate = new Date();
+
+const month = currentDate.getMonth() + 1;
+const day = currentDate.getDate();
+const year = currentDate.getFullYear();
+
+const formattedDate = `${month.toString().padStart(2, "0")}/${day
+	.toString()
+	.padStart(2, "0")}/${year}`;
+
+const element = document.querySelector("#current-date");
+
+element.textContent = formattedDate;
 
 // Data
 const account1 = {
 	owner: "Jonas Schmedtmann",
-	movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+	movements: [200, 450, -400, 3000, -650, -130, 70, 1300, -0.50],
 	interestRate: 1.2, // %
 	pin: 1111,
 };
@@ -59,7 +73,7 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 // displayMovement
 const displayMovement = function (movements) {
-	containerMovements.innerHTML = ""
+	containerMovements.innerHTML = "";
 
 	movements.forEach(function (mov, i) {
 		const type = mov > 0 ? "deposit" : "withdrawal";
@@ -72,5 +86,15 @@ const displayMovement = function (movements) {
 };
 displayMovement(account1.movements);
 
-const deposit = moviments.filter(movement => movement > 0)
-const withdrawals = moviments.filter(movement => movement < 0)
+// displayBalance
+const calcDisplayBalance = function(movement) {
+	const balance = movement.reduce((acc, cur) => acc + cur, 0);
+	labelBalance.textContent = `${balance}€`;
+}
+calcDisplayBalance(account1.movements)
+
+
+// filter displayMovements
+const deposit = moviments.filter((movement) => movement > 0);
+const withdrawals = moviments.filter((movement) => movement < 0);
+

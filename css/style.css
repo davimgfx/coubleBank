@@ -118,6 +118,11 @@ body {
   color: #888;
 }
 
+.date {
+  font-weight: 800;
+  padding-top: 0.2rem;
+}
+
 .balance__value {
   font-size: 4.5rem;
   font-weight: 400;
