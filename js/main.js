@@ -71,3 +71,6 @@ const displayMovement = function (movements) {
 	});
 };
 displayMovement(account1.movements);
+
+const deposit = moviments.filter(movement => movement > 0)
+const withdrawals = moviments.filter(movement => movement < 0)
