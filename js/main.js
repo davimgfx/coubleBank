@@ -17,7 +17,7 @@ element.textContent = formattedDate;
 // Data
 const account1 = {
 	owner: "Jonas Schmedtmann",
-	movements: [200, 450, -400, 3000, -650, -130, 70, 1300, -0.50],
+	movements: [200, 450, -400, 3000, -650, -130, 70, 1300, -0.5],
 	interestRate: 1.2, // %
 	pin: 1111,
 };
@@ -85,16 +85,18 @@ const displayMovement = function (movements) {
 	});
 };
 displayMovement(account1.movements);
+//Computing Usernames
+
+const createUsernames = function (accounts) {
+	accounts.forEach(function(account) {
+	account.username = account.owner.toLowerCase().split(" ").map((name) => name[0]).join("");
+	});
+};
+createUsernames(accounts)
 
 // displayBalance
-const calcDisplayBalance = function(movement) {
+const calcDisplayBalance = function (movement) {
 	const balance = movement.reduce((acc, cur) => acc + cur, 0);
 	labelBalance.textContent = `${balance}€`;
-}
-calcDisplayBalance(account1.movements)
-
-
-// filter displayMovements
-const deposit = moviments.filter((movement) => movement > 0);
-const withdrawals = moviments.filter((movement) => movement < 0);
-
+};
+calcDisplayBalance(account1.movements);
