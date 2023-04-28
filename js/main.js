@@ -76,10 +76,12 @@ const displayMovement = function (movements) {
 	containerMovements.innerHTML = "";
 
 	movements.forEach(function (mov, i) {
+		
 		const type = mov > 0 ? "deposit" : "withdrawal";
+		const color = mov > 0 ? "#66c873" : "#f5465d";
 		const html = `<div class="movements__row">
-					<div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-					<div class="movements__value">${mov}€</div>
+					<div class="movements__type movements__type--${type} ">${i + 1} ${type}</div>
+					<div class="movements__value" style="color: ${color};">${Math.abs(mov)}€</div>
 				    </div>`;
 		containerMovements.insertAdjacentHTML("afterbegin", html);
 	});
