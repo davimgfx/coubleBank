@@ -16,6 +16,16 @@
 	font-size: 1.3rem;
 	font-weight: 500;
 	cursor: pointer;
+	background-color: $color-info-dark;
+	padding: 1rem 1rem;
+	border-radius: 0.5rem;
+	color: $color-white;
+	transition: 0.5 ease;
+	&:hover{
+		color: $color-info-dark;
+		background-color: $color-white;
+		box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem 1.5rem;
+	}
 }
 
 .form__btn {

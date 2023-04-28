@@ -38,6 +38,16 @@ body {
   font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
+  background-color: #363949;
+  padding: 1rem 1rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  transition: 0.5 ease;
+}
+.btn--sort:hover {
+  color: #363949;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem 1.5rem;
 }
 
 .form__btn {
@@ -68,10 +78,10 @@ body {
 }
 .login__input:focus {
   outline: none;
-  border: 1px solid #ccc;
+  border: 1px solid #363949;
 }
 .login__input::placeholder {
-  color: #bbb;
+  color: #363949;
 }
 
 .form__input {
@@ -282,14 +292,14 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
   padding: 2rem 7%;
-  background: rgba(0, 0, 0, 0.2);
+  background: #363949;
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 .footer__text {
   font-size: 1.6rem;
-  color: #150e2e;
+  color: #fff;
   margin: auto;
 }
 

@@ -12,11 +12,11 @@
 	transition: all 0.3s;
 	&:focus {
 		outline: none;
-		border: 1px solid #ccc;
+		border: 1px solid $color-info-dark;
 	}
 
 	&::placeholder {
-		color: #bbb;
+		color: $color-info-dark;
 	}
 }
 
