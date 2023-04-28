@@ -85,14 +85,40 @@ const displayMovement = function (movements) {
 	});
 };
 displayMovement(account1.movements);
-//Computing Usernames
 
+//Computing Usernames
 const createUsernames = function (accounts) {
-	accounts.forEach(function(account) {
-	account.username = account.owner.toLowerCase().split(" ").map((name) => name[0]).join("");
+	accounts.forEach(function (account) {
+		account.username = account.owner
+			.toLowerCase()
+			.split(" ")
+			.map((name) => name[0])
+			.join("");
 	});
 };
-createUsernames(accounts)
+createUsernames(accounts);
+
+//displaySummary
+const calcDisplaySummary = function (movements) {
+	const incomes = movements
+		.filter((movement) => movement > 0)
+		.reduce((acc, movement) => acc + movement, 0);
+	const outcomes = movements
+		.filter((movement) => movement < 0)
+		.reduce((acc, movement) => acc + movement, 0);
+	labelSumIn.textContent = `${incomes}€`;
+	labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+
+	const interest = movements
+		.filter((movement) => movement > 0)
+		.map((deposit) => (deposit * 0.012))
+		.filter((int) => {
+			return int >= 1
+		})
+		.reduce((acc, int) => acc + int, 0);
+	labelSumInterest.textContent = `${Math.abs(interest)}€`;
+};
+calcDisplaySummary(account1.movements);
 
 // displayBalance
 const calcDisplayBalance = function (movement) {

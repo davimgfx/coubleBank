@@ -4,6 +4,7 @@
 	align-items: baseline;
 	padding: 0 0.3rem;
 	margin-top: 1rem;
+	font-weight: 500;
 	&__value {
 		font-size: 2.2rem;
 		margin-right: 2.5rem;
@@ -11,7 +12,7 @@
 		&--interest {
 			color: #66c873;
 		}
-		&----out {
+		&--out {
 			color: #f5465d;
 		}
 	}
