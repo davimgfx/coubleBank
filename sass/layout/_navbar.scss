@@ -1,0 +1,19 @@
+.welcome {
+	font-size: 1.8rem;
+	color: $color-primary;
+	font-weight: 600;
+	cursor: default;
+	margin-right: auto;
+}
+
+.navbar a {
+	font-size: 1.5rem;
+	color: $color-primary;
+	font-weight: 500;
+	margin-right: 3.5rem;
+	position: relative;
+	transition: 0.5s ease;
+	&:focus {
+		color: $color-dark;
+	}
+}

@@ -1,0 +1,18 @@
+/* OPERATIONS */
+.operation {
+	border-radius: 1rem;
+	padding: 3rem 4rem;
+	color: $color-white;
+	&--transfer {
+		background-image: linear-gradient(to top left, #d49305, #ffcb03);
+		border: 0.1rem solid $color-primary;
+	}
+	&--loan {
+		background-image: linear-gradient(to top left, #39b385, #7cb847);
+		border: 0.1rem solid $color-primary;
+	}
+	&--close {
+		background-image: linear-gradient(to top left, #bb254a, #c7555a);
+		border: 0.1rem solid $color-primary;
+	}
+}
