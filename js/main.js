@@ -43,7 +43,14 @@ const account4 = {
 	pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+	owner: "Test E S Test",
+	movements: [430, 1000, 700, 50, 90, 500, -400, 100],
+	interestRate: 1,
+	pin: 1234,
+};
+
+const accounts = [account1, account2, account3, account4, account5];
 
 // Elements
 const labelWelcome = document.querySelector(".welcome");
@@ -76,7 +83,6 @@ const displayMovement = function (movements) {
 	containerMovements.innerHTML = "";
 
 	movements.forEach(function (mov, i) {
-		
 		const type = mov > 0 ? "deposit" : "withdrawal";
 		const color = mov > 0 ? "#66c873" : "#f5465d";
 		const html = `<div class="movements__row">
@@ -86,7 +92,6 @@ const displayMovement = function (movements) {
 		containerMovements.insertAdjacentHTML("afterbegin", html);
 	});
 };
-displayMovement(account1.movements);
 
 //Computing Usernames
 const createUsernames = function (accounts) {
@@ -113,18 +118,35 @@ const calcDisplaySummary = function (movements) {
 
 	const interest = movements
 		.filter((movement) => movement > 0)
-		.map((deposit) => (deposit * 0.012))
+		.map((deposit) => deposit * 0.012)
 		.filter((int) => {
-			return int >= 1
+			return int >= 1;
 		})
 		.reduce((acc, int) => acc + int, 0);
 	labelSumInterest.textContent = `${Math.abs(interest)}€`;
 };
-calcDisplaySummary(account1.movements);
 
 // displayBalance
 const calcDisplayBalance = function (movement) {
 	const balance = movement.reduce((acc, cur) => acc + cur, 0);
 	labelBalance.textContent = `${balance}€`;
 };
-calcDisplayBalance(account1.movements);
+
+// Event handlers
+let currentAcount;
+btnLogin.addEventListener("click", function (event) {
+	event.preventDefault();
+	currentAcount = accounts.find(
+		(acc) => acc.username === inputLoginUsername.value
+	);
+
+	if (currentAcount?.pin === Number(inputLoginPin.value)) {
+		labelWelcome.textContent = `Welcome ${
+			currentAcount.owner.split(" ")[0]
+		}!`;
+		containerApp.style.opacity = 100;
+		displayMovement(currentAcount.movements);
+		calcDisplaySummary(currentAcount.movements);
+		calcDisplayBalance(currentAcount.movements);
+	}
+});
