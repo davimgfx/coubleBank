@@ -44,7 +44,7 @@ const account4 = {
 };
 
 const account5 = {
-	owner: "Test E S Test",
+	owner: "Tricy Estevi Steven Thurance",
 	movements: [430, 1000, 700, 50, 90, 500, -400, 100],
 	interestRate: 1,
 	pin: 1234,
@@ -105,31 +105,39 @@ const createUsernames = function (accounts) {
 };
 createUsernames(accounts);
 
+//UPDATE UI
+const updateUI = function(acc){
+	displayMovement(acc.movements);
+	calcDisplaySummary(acc);
+	calcDisplayBalance(acc);
+}
+
 //displaySummary
-const calcDisplaySummary = function (movements) {
-	const incomes = movements
+const calcDisplaySummary = function (acc) {
+	const incomes = acc.movements
 		.filter((movement) => movement > 0)
-		.reduce((acc, movement) => acc + movement, 0);
-	const outcomes = movements
-		.filter((movement) => movement < 0)
 		.reduce((acc, movement) => acc + movement, 0);
 	labelSumIn.textContent = `${incomes}€`;
+
+	const outcomes = acc.movements
+		.filter((movement) => movement < 0)
+		.reduce((acc, movement) => acc + movement, 0);
 	labelSumOut.textContent = `${Math.abs(outcomes)}€`;
 
-	const interest = movements
+	const interest = acc.movements
 		.filter((movement) => movement > 0)
-		.map((deposit) => deposit * 0.012)
+		.map((deposit) => (deposit * acc.interestRate) / 100)
 		.filter((int) => {
 			return int >= 1;
 		})
 		.reduce((acc, int) => acc + int, 0);
-	labelSumInterest.textContent = `${Math.abs(interest)}€`;
+	labelSumInterest.textContent = `${Math.abs(interest).toFixed(2)}€`;
 };
 
 // displayBalance
-const calcDisplayBalance = function (movement) {
-	const balance = movement.reduce((acc, cur) => acc + cur, 0);
-	labelBalance.textContent = `${balance}€`;
+const calcDisplayBalance = function (acc) {
+	acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
+	labelBalance.textContent = `${acc.balance}€`;
 };
 
 // Event handlers
@@ -144,9 +152,36 @@ btnLogin.addEventListener("click", function (event) {
 		labelWelcome.textContent = `Welcome ${
 			currentAcount.owner.split(" ")[0]
 		}!`;
+		inputLoginUsername.style.border = "none";
+		inputLoginPin.style.border = "none";
 		containerApp.style.opacity = 100;
-		displayMovement(currentAcount.movements);
-		calcDisplaySummary(currentAcount.movements);
-		calcDisplayBalance(currentAcount.movements);
+		inputLoginUsername.value = inputLoginPin.value = "";
+		inputLoginPin.blur();
+		updateUI(currentAcount);
+	} else {
+		inputLoginUsername.style.border = "1px solid red";
+		inputLoginPin.style.border = "1px solid red";
+		containerApp.style.opacity = 0;
+		labelWelcome.textContent = `Log in to get started`;
+	}
+});
+
+//TRANSFER MONEY
+
+btnTransfer.addEventListener("click", function (e) {
+	e.preventDefault();
+	const amount = Number(inputTransferAmount.value);
+	const receiverAcc = accounts.find(
+		(acc) => acc.username === inputTransferTo.value
+	);
+	if (
+		amount > 0 &&
+		receiverAcc &&
+		currentAcount.balance >= amount &&
+		receiverAcc?.username !== currentAcount.username
+	) {
+		currentAcount.movements.push(-amount)
+		receiverAcc.movements.push(amount);
+		updateUI(currentAcount)
 	}
 });
