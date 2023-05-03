@@ -105,20 +105,20 @@ const createUsernames = function (accounts) {
 };
 createUsernames(accounts);
 
-//RIGHT E WRONG INPUT
+//Right e wrong input
 const wrongInput = (...input) =>
 	input.map((elem) => (elem.style.border = "1px solid red"));
 const rightInput = (...input) =>
 	input.map((elem) => (elem.style.border = "none"));
 
-//UPDATE UI
+//Update UI
 const updateUI = function (acc) {
 	displayMovement(acc.movements);
 	calcDisplaySummary(acc);
 	calcDisplayBalance(acc);
 };
 
-//displaySummary
+//Display Summary
 const calcDisplaySummary = function (acc) {
 	const incomes = acc.movements
 		.filter((movement) => movement > 0)
@@ -140,7 +140,7 @@ const calcDisplaySummary = function (acc) {
 	labelSumInterest.textContent = `${Math.abs(interest).toFixed(2)}€`;
 };
 
-// displayBalance
+// Display Balance
 const calcDisplayBalance = function (acc) {
 	acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
 	labelBalance.textContent = `${acc.balance}€`;
@@ -171,14 +171,20 @@ btnLogin.addEventListener("click", function (event) {
 		labelWelcome.textContent = `Log in to get started`;
 	}
 });
-//Close
+
+//Close account
 btnClose.addEventListener("click", function (e) {
 	//to not restart the page when clicking in the close button
 	e.preventDefault();
-	if(inputCloseUsername.value === currentAcount.username && Number(inputClosePin.value) === currentAcount.pin){
-		const index = accounts.findIndex(account => account.username === currentAcount.username)
+	if (
+		inputCloseUsername.value === currentAcount.username &&
+		Number(inputClosePin.value) === currentAcount.pin
+	) {
+		const index = accounts.findIndex(
+			(account) => account.username === currentAcount.username
+		);
 		accounts.splice(index, 1);
-		containerApp.style.opacity = 0
+		containerApp.style.opacity = 0;
 		rightInput(inputCloseUsername, inputClosePin);
 	} else {
 		wrongInput(inputCloseUsername, inputClosePin);
@@ -186,14 +192,14 @@ btnClose.addEventListener("click", function (e) {
 	inputCloseUsername.value = inputClosePin.value = "";
 });
 
-//TRANSFER MONEY
+//Transfer money
 btnTransfer.addEventListener("click", function (e) {
 	e.preventDefault();
 	const amount = Number(inputTransferAmount.value);
 	const receiverAcc = accounts.find(
 		(acc) => acc.username === inputTransferTo.value
 	);
-	// Clear the input
+	// Clear input
 	inputTransferAmount.value = inputTransferTo.value = "";
 	if (
 		amount > 0 &&
@@ -208,4 +214,21 @@ btnTransfer.addEventListener("click", function (e) {
 	} else {
 		wrongInput(inputTransferAmount, inputTransferTo);
 	}
+});
+
+//Loan money
+btnLoan.addEventListener("click", function (e) {
+	e.preventDefault();
+	const amount = Number(inputLoanAmount.value);
+	if (
+		amount > 0 &&
+		currentAcount.movements.some((mov) => mov >= amount * 0.1)
+	) {
+		currentAcount.movements.push(amount);
+		updateUI(currentAcount);
+		rightInput(inputLoanAmount);
+	} else {
+		wrongInput(inputLoanAmount);
+	}
+	inputLoanAmount.value = "";
 });
