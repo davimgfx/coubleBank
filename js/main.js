@@ -14,7 +14,7 @@ const element = document.querySelector("#current-date");
 
 element.textContent = formattedDate;
 
-// Data
+//Data
 const account1 = {
 	owner: "Jonas Schmedtmann",
 	movements: [200, 450, -400, 3000, -650, -130, 70, 1300, -0.5],
@@ -52,7 +52,7 @@ const account5 = {
 
 const accounts = [account1, account2, account3, account4, account5];
 
-// Elements
+//Elements
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".date");
 const labelBalance = document.querySelector(".balance__value");
@@ -78,11 +78,13 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-// displayMovement
-const displayMovement = function (movements) {
+//Display Movement
+const displayMovement = function (movements, sort = false) {
 	containerMovements.innerHTML = "";
 
-	movements.forEach(function (mov, i) {
+	const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+	movs.forEach(function (mov, i) {
 		const type = mov > 0 ? "deposit" : "withdrawal";
 		const color = mov > 0 ? "#66c873" : "#f5465d";
 		const html = `<div class="movements__row">
@@ -140,7 +142,7 @@ const calcDisplaySummary = function (acc) {
 	labelSumInterest.textContent = `${Math.abs(interest).toFixed(2)}€`;
 };
 
-// Display Balance
+//Display Balance
 const calcDisplayBalance = function (acc) {
 	acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
 	labelBalance.textContent = `${acc.balance}€`;
@@ -161,7 +163,7 @@ btnLogin.addEventListener("click", function (event) {
 		}!`;
 		rightInput(inputLoginUsername, inputLoginPin);
 		containerApp.style.opacity = 100;
-		// Clear the input
+		//Clear the input
 		inputLoginUsername.value = inputLoginPin.value = "";
 		inputLoginPin.blur();
 		updateUI(currentAcount);
@@ -174,7 +176,7 @@ btnLogin.addEventListener("click", function (event) {
 
 //Close account
 btnClose.addEventListener("click", function (e) {
-	//to not restart the page when clicking in the close button
+	//To not restart the page when clicking in the close button
 	e.preventDefault();
 	if (
 		inputCloseUsername.value === currentAcount.username &&
@@ -232,3 +234,11 @@ btnLoan.addEventListener("click", function (e) {
 	}
 	inputLoanAmount.value = "";
 });
+
+//Sort movements
+let sortedStates = false;
+btnSort.addEventListener("click", function(e) {
+	e.preventDefault();
+	displayMovement(currentAcount.movements, !sortedStates);
+	sortedStates = !sortedStates;
+})

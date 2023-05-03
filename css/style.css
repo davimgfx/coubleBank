@@ -293,14 +293,14 @@ h2 {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding: 2rem 7%;
+  padding: 1rem 7%;
   background: #363949;
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 .footer__text {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: #fff;
   margin: auto;
 }
