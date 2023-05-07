@@ -9,3 +9,11 @@ The banking system offers the following features:
 * **Loans**: users can request a loan, providing the desired amount and the desired interest rate.
 * **Transfers**: users can transfer money from one account to another.
 * **Account removal**: users can remove their account from the system.
+
+## Test
+If you want to test it, use the demo accounts:
+* USER: **js**, PIN: **1111**;
+* USER: **jd**, PIN: **2222**;
+* USER: **stw**, PIN: **3333**;
+* USER: **ss**, PIN: **4444**;
+* USER: **test**, PIN: **1234**.
