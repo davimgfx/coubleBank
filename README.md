@@ -12,8 +12,8 @@ The banking system offers the following features:
 
 ## Test
 If you want to test it, use the demo accounts:
-* USER: **js**, PIN: **1111**;
-* USER: **jd**, PIN: **2222**;
-* USER: **stw**, PIN: **3333**;
-* USER: **ss**, PIN: **4444**;
-* USER: **test**, PIN: **1234**.
+* user: **js**, PIN: **1111**;
+* user: **jd**, PIN: **2222**;
+* user: **stw**, PIN: **3333**;
+* user: **ss**, PIN: **4444**;
+* user: **test**, PIN: **1234**.
