@@ -16,9 +16,9 @@ element.textContent = formattedDate;
 
 //Data
 const account1 = {
-  owner: "Jonas Schmedtmann",
+  owner: "João Schut",
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, 
+  interestRate: 1.2,
   movementsDates: [
     "2019-11-18T21:31:17.178Z",
     "2019-12-23T07:42:02.383Z",
@@ -33,7 +33,7 @@ const account1 = {
 };
 
 const account2 = {
-  owner: "Jessica Davis",
+  owner: "Jess Neves",
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   movementsDates: [
     "2019-11-01T13:15:33.035Z",
@@ -74,7 +74,7 @@ const account4 = {
     "2019-05-23T17:50:12.892Z",
     "2020-06-07T23:09:28.203Z",
     "2021-06-29T19:39:43.314Z",
-	"2022-07-02T20:59:31.721Z",
+    "2022-07-02T20:59:31.721Z",
     "2022-08-06T11:13:59.661Z",
   ],
   pin: 4444,
@@ -204,7 +204,7 @@ btnLogin.addEventListener("click", function (event) {
     (acc) => acc.username === inputLoginUsername.value
   );
 
-  if (currentAcount?.pin === Number(inputLoginPin.value)) {
+  if (currentAcount?.pin === +inputLoginPin.value) {
     labelWelcome.textContent = `Welcome ${currentAcount.owner.split(" ")[0]}!`;
     rightInput(inputLoginUsername, inputLoginPin);
     containerApp.style.opacity = 100;
@@ -225,7 +225,7 @@ btnClose.addEventListener("click", function (e) {
   e.preventDefault();
   if (
     inputCloseUsername.value === currentAcount.username &&
-    Number(inputClosePin.value) === currentAcount.pin
+    +inputClosePin.value === currentAcount.pin
   ) {
     const index = accounts.findIndex(
       (account) => account.username === currentAcount.username
@@ -233,6 +233,7 @@ btnClose.addEventListener("click", function (e) {
     accounts.splice(index, 1);
     containerApp.style.opacity = 0;
     rightInput(inputCloseUsername, inputClosePin);
+	labelWelcome.textContent = `Log in to get started`;
   } else {
     wrongInput(inputCloseUsername, inputClosePin);
   }
@@ -242,7 +243,7 @@ btnClose.addEventListener("click", function (e) {
 //Transfer money
 btnTransfer.addEventListener("click", function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     (acc) => acc.username === inputTransferTo.value
   );
@@ -266,7 +267,7 @@ btnTransfer.addEventListener("click", function (e) {
 //Loan money
 btnLoan.addEventListener("click", function (e) {
   e.preventDefault();
-  const amount = Number(inputLoanAmount.value);
+  const amount = +inputLoanAmount.value;
   if (
     amount > 0 &&
     currentAcount.movements.some((mov) => mov >= amount * 0.1)
