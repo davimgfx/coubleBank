@@ -1,6 +1,6 @@
 # CoubleBank 💵
 This is a simple banking system that allows users to log in and perform some basic banking operations, such as requesting loans, transferring money, and removing their account. <br>
-Link: *https://davimgfx.github.io/coubleBank/*
+Link: **https://davimgfx.github.io/coubleBank/**
 
 ## Features
 The banking system offers the following features:
