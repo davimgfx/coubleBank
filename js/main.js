@@ -17,7 +17,7 @@ element.textContent = formattedDate;
 //Data
 const account1 = {
   owner: "João Schut",
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [200, 450.81, -400.8, 3000, -650, -130.01 , 70, 1300],
   interestRate: 1.2,
   movementsDates: [
     "2019-11-18T21:31:17.178Z",
@@ -34,7 +34,7 @@ const account1 = {
 
 const account2 = {
   owner: "Jess Neves",
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  movements: [5000, 3400, -150, -790, -321.01, -10.02, 8500, -30],
   movementsDates: [
     "2019-11-01T13:15:33.035Z",
     "2019-11-30T09:48:16.867Z",
@@ -136,7 +136,7 @@ const displayMovement = function (movements, sort = false) {
     const color = mov > 0 ? "#66c873" : "#f5465d";
     const html = `<div class="movements__row">
 					<div class="movements__type movements__type--${type} ">${i + 1} ${type}</div>
-					<div class="movements__value" style="color: ${color};">${Math.abs(mov)}€</div>
+					<div class="movements__value" style="color: ${color};">${Math.abs(mov) % 1 ? Math.abs(mov).toFixed(2) : Math.abs(mov)}€</div>
 				    </div>`;
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
@@ -172,12 +172,12 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter((movement) => movement > 0)
     .reduce((acc, movement) => acc + movement, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${Math.abs(incomes).toFixed(2)}€`;
 
   const outcomes = acc.movements
     .filter((movement) => movement < 0)
     .reduce((acc, movement) => acc + movement, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes)}€`;
+  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter((movement) => movement > 0)
@@ -192,7 +192,7 @@ const calcDisplaySummary = function (acc) {
 //Display Balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance % 1? acc.balance.toFixed(2) : acc.balance}€`;
 };
 
 // =================Event handlers================
@@ -267,7 +267,7 @@ btnTransfer.addEventListener("click", function (e) {
 //Loan money
 btnLoan.addEventListener("click", function (e) {
   e.preventDefault();
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
   if (
     amount > 0 &&
     currentAcount.movements.some((mov) => mov >= amount * 0.1)
