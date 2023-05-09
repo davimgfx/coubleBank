@@ -31,7 +31,7 @@ body {
   color: #363949;
 }
 
-.btn--sort {
+.btn--sort, .btn--convert {
   margin-left: auto;
   border: none;
   background: none;
@@ -44,10 +44,14 @@ body {
   color: #fff;
   transition: 0.5 ease;
 }
-.btn--sort:hover {
+.btn--sort:hover, .btn--convert:hover {
   color: #363949;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0 0.5rem 1.5rem;
+}
+
+.btn--convert {
+  margin-left: 2rem;
 }
 
 .form__btn {
