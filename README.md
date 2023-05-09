@@ -9,7 +9,7 @@ The banking system offers the following features:
 * **Loans**: users can request a loan, providing the desired amount and the desired interest rate.
 * **Transfers**: users can transfer money from one account to another.
 * **Account removal**: users can remove their account from the system.
-* **Convert cash**: API convert dollar to euro and euro to dollar 
+* **Convert cash**: API convert euro to dollar.
 
 ## Test
 If you want to test it, use the demo accounts:
