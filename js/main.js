@@ -51,7 +51,7 @@ const account2 = {
 
 const account3 = {
   owner: "Steven Thomas Williams",
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  movements: [200, -200, 340, -300, -20, 50, 400],
   movementsDates: [
     "2019-11-18T21:31:17.178Z",
     "2019-12-23T07:42:02.383Z",
@@ -60,7 +60,6 @@ const account3 = {
     "2020-05-08T14:11:59.604Z",
     "2021-05-27T17:01:17.194Z",
     "2021-07-11T23:36:17.929Z",
-    "2022-07-12T10:51:36.790Z",
   ],
   interestRate: 0.7,
   pin: 3333,

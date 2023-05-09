@@ -8,6 +8,16 @@
 		display: flex;
 		align-items: center;
 		border-bottom: 1px solid #eee;
+		box-shadow: rgba(219, 211, 211, 0.5) -3px -3px 6px 1px inset;
+		&:nth-child(odd){
+			background: #e0e0e0;
+		}
+		&:nth-child(even){
+			background: #ffffff;
+		}
+		&:first-child{
+			box-shadow: rgb(169, 171, 173) 3px 3px 6px 0px inset, rgba(182, 175, 175, 0.5) -3px -3px 6px 1px inset;
+		}
 	}
 	&__type {
 		font-size: 1.1rem;
