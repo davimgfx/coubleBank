@@ -293,6 +293,7 @@ btnSort.addEventListener("click", function (e) {
   sortedStates = !sortedStates;
 });
 
+//Convert coins
 let convertStates = false;
 btnConvert.addEventListener("click", function (e) {
   e.preventDefault();
@@ -306,9 +307,11 @@ btnConvert.addEventListener("click", function (e) {
       if(convertStates === false) {
         const currentValue = currentAcount.movements.reduce((acc, cur) => acc + cur, 0) * dollarToEuro
         labelBalance.textContent = `${currentValue.toFixed(2)}$`
+        btnConvert.innerHTML = `DOLAR &rightarrow; EURO`
       } else {
         const currentValue = currentAcount.movements.reduce((acc, cur) => acc + cur, 0)
         labelBalance.textContent = `${currentValue % 1 ? currentValue.toFixed(2) : currentValue}€`
+        btnConvert.innerHTML = `EURO &rightarrow; DOLAR`
       }
       convertStates = !convertStates
     })
