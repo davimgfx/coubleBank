@@ -110,47 +110,30 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
-//Day actually
-const currentDate = new Date();
-
-const month = currentDate.getMonth() + 1;
-const day = currentDate.getDate();
-const year = currentDate.getFullYear();
-const formattedDate = `Today is ${month.toString().padStart(2, "0")}/${day
-  .toString()
-  .padStart(2, "0")}/${year}`;
-const element = document.querySelector("#current-date");
-
-element.textContent = formattedDate;
-
-function getTime() {
-  const date = new Date();
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  const seconds = String(date.getSeconds()).padStart(2, "0");
-  const timeString = `${hours}:${minutes}:${seconds}`;
-  return timeString;
-}
-
-setInterval(() => {
-  const clock = document.getElementById("clock");
-  clock.textContent = getTime();
-}, 1000);
-
 //Display Movement
 const displayMovement = function (acc, sort = false) {
   containerMovements.innerHTML = "";
 
-  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
   movs.forEach(function (mov, i) {
-    const displayDate = Math.floor((currentDate - new Date(acc.movementsDates[i]))/ (1000 * 60 * 60 * 24))
-    const oldDate = new Date(acc.movementsDates[i])
-    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    const displayDate = Math.floor(
+      (new Date() - new Date(acc.movementsDates[i])) / (1000 * 60 * 60 * 24)
+    );
+    const oldDate = new Date(acc.movementsDates[i]);
+    const options = { month: "long", day: "numeric", year: "numeric" };
     const type = mov > 0 ? "deposit" : "withdrawal";
     const color = mov > 0 ? "#66c873" : "#f5465d";
     const html = `<div class="movements__row">
 					<div class="movements__type movements__type--${type} ">${i + 1} ${type}</div>
-          <div class="movements__date">${displayDate <= 29 ? `${displayDate} day ago` :  `${oldDate.toLocaleString('en-US', options)}`}</div>
+          <div class="movements__date">${
+            displayDate === 0
+              ? "today"
+              : displayDate <= 29
+              ? `${displayDate} day ago`
+              : `${oldDate.toLocaleString("en-US", options)}`
+          }</div>
 					<div class="movements__value" style="color: ${color};">${
       Math.abs(mov) % 1 ? Math.abs(mov).toFixed(2) : Math.abs(mov)
     }€</div>
@@ -235,6 +218,31 @@ btnLogin.addEventListener("click", function (event) {
     //Clear the input
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
+    //Current day
+    const currentDate = new Date();
+    const month = currentDate.getMonth() + 1;
+    const day = currentDate.getDate();
+    const year = currentDate.getFullYear();
+    const formattedDate = `Today is ${month.toString().padStart(2, "0")}/${day
+      .toString()
+      .padStart(2, "0")}/${year}`;
+    const element = document.querySelector("#current-date");
+
+    element.textContent = formattedDate;
+
+    function getTime() {
+      const date = new Date();
+      const hours = String(date.getHours()).padStart(2, "0");
+      const minutes = String(date.getMinutes()).padStart(2, "0");
+      const seconds = String(date.getSeconds()).padStart(2, "0");
+      const timeString = `${hours}:${minutes}:${seconds}`;
+      return timeString;
+    }
+
+    setInterval(() => {
+      const clock = document.getElementById("clock");
+      clock.textContent = getTime();
+    }, 1000);
     updateUI(currentAcount);
   } else {
     wrongInput(inputLoginUsername, inputLoginPin);
@@ -281,8 +289,10 @@ btnTransfer.addEventListener("click", function (e) {
   ) {
     currentAcount.movements.push(-amount);
     receiverAcc.movements.push(amount);
-    updateUI(currentAcount);
+    currentAcount.movementsDates.push(new Date());
+    receiverAcc.movementsDates.push(new Date());
     rightInput(inputTransferAmount, inputTransferTo);
+    updateUI(currentAcount);
   } else {
     wrongInput(inputTransferAmount, inputTransferTo);
   }
@@ -297,6 +307,7 @@ btnLoan.addEventListener("click", function (e) {
     currentAcount.movements.some((mov) => mov >= amount * 0.1)
   ) {
     currentAcount.movements.push(amount);
+    currentAcount.movementsDates.push(new Date())
     updateUI(currentAcount);
     rightInput(inputLoanAmount);
   } else {
