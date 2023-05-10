@@ -1,19 +1,4 @@
 "use strict";
-//Day actually
-const currentDate = new Date();
-
-const month = currentDate.getMonth() + 1;
-const day = currentDate.getDate();
-const year = currentDate.getFullYear();
-
-const formattedDate = `${month.toString().padStart(2, "0")}/${day
-  .toString()
-  .padStart(2, "0")}/${year}`;
-
-const element = document.querySelector("#current-date");
-
-element.textContent = formattedDate;
-
 //Data
 const account1 = {
   owner: "João Schut",
@@ -27,7 +12,7 @@ const account1 = {
     "2020-05-08T14:11:59.604Z",
     "2021-05-27T17:01:17.194Z",
     "2021-07-11T23:36:17.929Z",
-    "2022-07-12T10:51:36.790Z",
+    "2023-05-09T10:51:36.790Z",
   ],
   pin: 1111,
 };
@@ -125,17 +110,47 @@ const inputLoanAmount = document.querySelector(".form__input--loan-amount");
 const inputCloseUsername = document.querySelector(".form__input--user");
 const inputClosePin = document.querySelector(".form__input--pin");
 
+//Day actually
+const currentDate = new Date();
+
+const month = currentDate.getMonth() + 1;
+const day = currentDate.getDate();
+const year = currentDate.getFullYear();
+const formattedDate = `Today is ${month.toString().padStart(2, "0")}/${day
+  .toString()
+  .padStart(2, "0")}/${year}`;
+const element = document.querySelector("#current-date");
+
+element.textContent = formattedDate;
+
+function getTime() {
+  const date = new Date();
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  const timeString = `${hours}:${minutes}:${seconds}`;
+  return timeString;
+}
+
+setInterval(() => {
+  const clock = document.getElementById("clock");
+  clock.textContent = getTime();
+}, 1000);
+
 //Display Movement
-const displayMovement = function (movements, sort = false) {
+const displayMovement = function (acc, sort = false) {
   containerMovements.innerHTML = "";
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
-
+  const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
   movs.forEach(function (mov, i) {
+    const displayDate = Math.floor((currentDate - new Date(acc.movementsDates[i]))/ (1000 * 60 * 60 * 24))
+    const oldDate = new Date(acc.movementsDates[i])
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
     const type = mov > 0 ? "deposit" : "withdrawal";
     const color = mov > 0 ? "#66c873" : "#f5465d";
     const html = `<div class="movements__row">
 					<div class="movements__type movements__type--${type} ">${i + 1} ${type}</div>
+          <div class="movements__date">${displayDate <= 29 ? `${displayDate} day ago` :  `${oldDate.toLocaleString('en-US', options)}`}</div>
 					<div class="movements__value" style="color: ${color};">${
       Math.abs(mov) % 1 ? Math.abs(mov).toFixed(2) : Math.abs(mov)
     }€</div>
@@ -164,7 +179,7 @@ const rightInput = (...input) =>
 
 //Update UI
 const updateUI = function (acc) {
-  displayMovement(acc.movements);
+  displayMovement(acc);
   calcDisplaySummary(acc);
   calcDisplayBalance(acc);
 };
@@ -201,7 +216,12 @@ const calcDisplayBalance = function (acc) {
 
 // =================Event handlers================
 //Login
+
 let currentAcount;
+currentAcount = account1;
+updateUI(currentAcount);
+containerApp.style.opacity = 100;
+
 btnLogin.addEventListener("click", function (event) {
   event.preventDefault();
   currentAcount = accounts.find(
@@ -289,7 +309,7 @@ btnLoan.addEventListener("click", function (e) {
 let sortedStates = false;
 btnSort.addEventListener("click", function (e) {
   e.preventDefault();
-  displayMovement(currentAcount.movements, !sortedStates);
+  displayMovement(currentAcount, !sortedStates);
   sortedStates = !sortedStates;
 });
 
@@ -304,16 +324,23 @@ btnConvert.addEventListener("click", function (e) {
     .then((response) => response.json())
     .then((data) => {
       const dollarToEuro = data.EURBRL.high / data.USDBRL.high;
-      if(convertStates === false) {
-        const currentValue = currentAcount.movements.reduce((acc, cur) => acc + cur, 0) * dollarToEuro
-        labelBalance.textContent = `${currentValue.toFixed(2)}$`
-        btnConvert.innerHTML = `DOLAR &rightarrow; EURO`
+      if (convertStates === false) {
+        const currentValue =
+          currentAcount.movements.reduce((acc, cur) => acc + cur, 0) *
+          dollarToEuro;
+        labelBalance.textContent = `${currentValue.toFixed(2)}$`;
+        btnConvert.innerHTML = `DOLAR &rightarrow; EURO`;
       } else {
-        const currentValue = currentAcount.movements.reduce((acc, cur) => acc + cur, 0)
-        labelBalance.textContent = `${currentValue % 1 ? currentValue.toFixed(2) : currentValue}€`
-        btnConvert.innerHTML = `EURO &rightarrow; DOLAR`
+        const currentValue = currentAcount.movements.reduce(
+          (acc, cur) => acc + cur,
+          0
+        );
+        labelBalance.textContent = `${
+          currentValue % 1 ? currentValue.toFixed(2) : currentValue
+        }€`;
+        btnConvert.innerHTML = `EURO &rightarrow; DOLAR`;
       }
-      convertStates = !convertStates
+      convertStates = !convertStates;
     })
     .catch((error) => console.error(error));
 });
