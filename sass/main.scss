@@ -35,16 +35,17 @@
     display: flex;
     flex-direction: column;
   }
-  .movements{
+  .movements {
     width: 60%;
     margin: auto;
   }
-  .operation{
+  .operation {
     width: 60%;
     margin: auto;
   }
-  
-  .summary, .logout-timer {
+
+  .summary,
+  .logout-timer {
     margin: auto;
   }
 }
@@ -58,9 +59,8 @@
       margin-right: 0rem;
     }
   }
-  .operation{
+  .operation {
     width: 80%;
-    
   }
   .btn--sort {
     display: block;

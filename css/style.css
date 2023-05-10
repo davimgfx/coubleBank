@@ -336,7 +336,8 @@ h2 {
     width: 60%;
     margin: auto;
   }
-  .summary, .logout-timer {
+  .summary,
+  .logout-timer {
     margin: auto;
   }
 }
