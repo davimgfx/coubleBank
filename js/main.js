@@ -201,9 +201,6 @@ const calcDisplayBalance = function (acc) {
 //Login
 
 let currentAcount;
-currentAcount = account1;
-updateUI(currentAcount);
-containerApp.style.opacity = 100;
 
 btnLogin.addEventListener("click", function (event) {
   event.preventDefault();

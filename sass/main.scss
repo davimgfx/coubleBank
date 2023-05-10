@@ -16,5 +16,73 @@
 @import "layout/app";
 @import "layout/header";
 @import "layout/navbar";
-@import "layout/footer";
 @import "layout/logout";
+
+/* BREAKPOINTS */
+@media (max-width: 1120px) {
+  html {
+    font-size: 55%;
+  }
+
+  .balance {
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+  }
+  .movements{
+    width: 60%;
+    margin: auto;
+  }
+  .operation{
+    width: 60%;
+    margin: auto;
+  }
+  
+  .summary, .logout-timer {
+    margin: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__value {
+      margin-right: 0rem;
+    }
+  }
+  .operation{
+    width: 80%;
+    
+  }
+  .btn--sort {
+    display: block;
+    padding: 1rem 1rem;
+    margin: auto;
+  }
+}
+
+@media (max-width: 440px) {
+  .header {
+    flex-direction: column;
+  }
+  .login {
+    margin: 2rem;
+  }
+  .app {
+    margin-top: 12rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .app {
+    margin-top: 15rem;
+  }
+}

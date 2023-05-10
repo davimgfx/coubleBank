@@ -302,23 +302,6 @@ h2 {
   color: #150e2e;
 }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1rem 7%;
-  background: #363949;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-.footer__text {
-  font-size: 1.3rem;
-  color: #fff;
-  margin: auto;
-}
-
 .logout-timer {
   padding: 0 0.3rem;
   margin-top: 1.9rem;
@@ -328,6 +311,68 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+
+/* BREAKPOINTS */
+@media (max-width: 1120px) {
+  html {
+    font-size: 55%;
+  }
+  .balance {
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+  }
+  .app {
+    display: flex;
+    flex-direction: column;
+  }
+  .movements {
+    width: 60%;
+    margin: auto;
+  }
+  .operation {
+    width: 60%;
+    margin: auto;
+  }
+  .summary, .logout-timer {
+    margin: auto;
+  }
+}
+@media (max-width: 480px) {
+  .summary {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .summary__value {
+    margin-right: 0rem;
+  }
+  .operation {
+    width: 80%;
+  }
+  .btn--sort {
+    display: block;
+    padding: 1rem 1rem;
+    margin: auto;
+  }
+}
+@media (max-width: 440px) {
+  .header {
+    flex-direction: column;
+  }
+  .login {
+    margin: 2rem;
+  }
+  .app {
+    margin-top: 12rem;
+  }
+}
+@media (max-width: 350px) {
+  .app {
+    margin-top: 15rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
