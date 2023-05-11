@@ -1,5 +1,6 @@
 "use strict";
 //Data
+
 const account1 = {
   owner: "João Schut",
   movements: [200, 450.81, -400.8, 3000, -650, -130.01, 70, 1300],
@@ -189,7 +190,7 @@ const updateUI = function (acc) {
 //Display Balance
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
-  
+
   labelBalance.textContent = new Intl.NumberFormat(acc.locale, {
     style: "currency",
     currency: acc.currency,
@@ -206,9 +207,11 @@ const calcDisplaySummary = function (acc) {
     currency: acc.currency,
   }).format(incomes);
 
-  const outcomes = Math.abs(acc.movements
-    .filter((movement) => movement < 0)
-    .reduce((acc, movement) => acc + movement, 0));
+  const outcomes = Math.abs(
+    acc.movements
+      .filter((movement) => movement < 0)
+      .reduce((acc, movement) => acc + movement, 0)
+  );
   labelSumOut.textContent = new Intl.NumberFormat(acc.locale, {
     style: "currency",
     currency: acc.currency,
@@ -226,7 +229,6 @@ const calcDisplaySummary = function (acc) {
     currency: acc.currency,
   }).format(interest);
 };
-
 
 // =================Event handlers================
 //Login
@@ -252,15 +254,16 @@ btnLogin.addEventListener("click", function (event) {
     //Day actual
     const now = new Date();
     const options = {
-      hour: "numeric",
-      minute: "numeric",
       day: "numeric",
       month: "numeric",
       year: "numeric",
     };
     //const locale = navigator.language
     const locale = currentAcount.locale;
-    labelDate.textContent = Intl.DateTimeFormat(locale, options).format(now);
+    labelDate.textContent = `Today is ${Intl.DateTimeFormat(
+      locale,
+      options
+    ).format(now)}`;
     updateUI(currentAcount);
   } else {
     wrongInput(inputLoginUsername, inputLoginPin);
