@@ -19,4 +19,4 @@ If you want to test it, use the demo accounts:
 * user: **ss**, PIN: **4444**;  (en-US)
 * user: **test**, PIN: **1234**. (pt-PT)
 
-*In this project, BRL=USD=EUR have the same value*
+*In this project, BRL, USD, and EUR have the same value*
