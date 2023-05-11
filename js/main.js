@@ -110,7 +110,6 @@ const btnTransfer = document.querySelector(".form__btn--transfer");
 const btnLoan = document.querySelector(".form__btn--loan");
 const btnClose = document.querySelector(".form__btn--close");
 const btnSort = document.querySelector(".btn--sort");
-const btnConvert = document.querySelector(".btn--convert");
 
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
@@ -127,7 +126,6 @@ const formatMovementDate = function (date, locale) {
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
   const daysPassed = calcDaysPassed(new Date(), date);
-  console.log(daysPassed);
 
   if (daysPassed === 0) return "Today";
   if (daysPassed === 1) return "Yesterday";
@@ -135,6 +133,7 @@ const formatMovementDate = function (date, locale) {
 
   return new Intl.DateTimeFormat(locale).format(date);
 };
+
 //Display Movement
 const displayMovement = function (acc, sort = false) {
   containerMovements.innerHTML = "";
@@ -145,15 +144,19 @@ const displayMovement = function (acc, sort = false) {
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? "deposit" : "withdrawal";
     const color = mov > 0 ? "#66c873" : "#f5465d";
-    const date = new Date(acc.movementsDates[i])
+    const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
+
+    const formattedMov = new Intl.NumberFormat(acc.locale, {
+      style: "currency",
+      currency: acc.currency,
+    }).format(mov);
     const html = `<div class="movements__row">
 					<div class="movements__type movements__type--${type} ">${i + 1} ${type}</div>
           <div class="movements__date">${displayDate}</div>
-					<div class="movements__value" style="color: ${color};">${
-      Math.abs(mov) % 1 ? Math.abs(mov).toFixed(2) : Math.abs(mov)
-    }€</div>
-				    </div>`;
+					<div class="movements__value" style="color: ${color};">${formattedMov}
+          </div>
+				  </div>`;
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
@@ -183,17 +186,33 @@ const updateUI = function (acc) {
   calcDisplayBalance(acc);
 };
 
+//Display Balance
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
+  
+  labelBalance.textContent = new Intl.NumberFormat(acc.locale, {
+    style: "currency",
+    currency: acc.currency,
+  }).format(acc.balance);
+};
+
 //Display Summary
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter((movement) => movement > 0)
     .reduce((acc, movement) => acc + movement, 0);
-  labelSumIn.textContent = `${Math.abs(incomes).toFixed(2)}€`;
+  labelSumIn.textContent = new Intl.NumberFormat(acc.locale, {
+    style: "currency",
+    currency: acc.currency,
+  }).format(incomes);
 
-  const outcomes = acc.movements
+  const outcomes = Math.abs(acc.movements
     .filter((movement) => movement < 0)
-    .reduce((acc, movement) => acc + movement, 0);
-  labelSumOut.textContent = `${Math.abs(outcomes).toFixed(2)}€`;
+    .reduce((acc, movement) => acc + movement, 0));
+  labelSumOut.textContent = new Intl.NumberFormat(acc.locale, {
+    style: "currency",
+    currency: acc.currency,
+  }).format(outcomes);
 
   const interest = acc.movements
     .filter((movement) => movement > 0)
@@ -202,16 +221,12 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${Math.abs(interest).toFixed(2)}€`;
+  labelSumInterest.textContent = new Intl.NumberFormat(acc.locale, {
+    style: "currency",
+    currency: acc.currency,
+  }).format(interest);
 };
 
-//Display Balance
-const calcDisplayBalance = function (acc) {
-  acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
-  labelBalance.textContent = `${
-    acc.balance % 1 ? acc.balance.toFixed(2) : acc.balance
-  }€`;
-};
 
 // =================Event handlers================
 //Login
@@ -245,7 +260,7 @@ btnLogin.addEventListener("click", function (event) {
     };
     //const locale = navigator.language
     const locale = currentAcount.locale;
-    labelDate.textContent = `Today is ${Intl.DateTimeFormat(locale, options).format(now)}`
+    labelDate.textContent = Intl.DateTimeFormat(locale, options).format(now);
     updateUI(currentAcount);
   } else {
     wrongInput(inputLoginUsername, inputLoginPin);
@@ -325,36 +340,4 @@ btnSort.addEventListener("click", function (e) {
   e.preventDefault();
   displayMovement(currentAcount, !sortedStates);
   sortedStates = !sortedStates;
-});
-
-//Convert coins
-let convertStates = false;
-btnConvert.addEventListener("click", function (e) {
-  e.preventDefault();
-  const moedas = "USD-BRL,EUR-BRL";
-  const apiEndpoint = `https://economia.awesomeapi.com.br/last/${moedas}`;
-
-  fetch(apiEndpoint)
-    .then((response) => response.json())
-    .then((data) => {
-      const dollarToEuro = data.EURBRL.high / data.USDBRL.high;
-      if (convertStates === false) {
-        const currentValue =
-          currentAcount.movements.reduce((acc, cur) => acc + cur, 0) *
-          dollarToEuro;
-        labelBalance.textContent = `${currentValue.toFixed(2)}$`;
-        btnConvert.innerHTML = `DOLAR &rightarrow; EURO`;
-      } else {
-        const currentValue = currentAcount.movements.reduce(
-          (acc, cur) => acc + cur,
-          0
-        );
-        labelBalance.textContent = `${
-          currentValue % 1 ? currentValue.toFixed(2) : currentValue
-        }€`;
-        btnConvert.innerHTML = `EURO &rightarrow; DOLAR`;
-      }
-      convertStates = !convertStates;
-    })
-    .catch((error) => console.error(error));
 });
