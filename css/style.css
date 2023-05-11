@@ -298,17 +298,6 @@ h2 {
   color: #150e2e;
 }
 
-.logout-timer {
-  padding: 0 0.3rem;
-  margin-top: 1.9rem;
-  text-align: right;
-  font-size: 1.25rem;
-}
-
-.timer {
-  font-weight: 600;
-}
-
 /* BREAKPOINTS */
 @media (max-width: 1120px) {
   html {

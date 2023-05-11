@@ -230,6 +230,7 @@ const calcDisplaySummary = function (acc) {
   }).format(interest);
 };
 
+
 // =================Event handlers================
 //Login
 
