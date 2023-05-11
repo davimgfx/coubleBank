@@ -322,10 +322,12 @@ btnLoan.addEventListener("click", function (e) {
     amount > 0 &&
     currentAcount.movements.some((mov) => mov >= amount * 0.1)
   ) {
-    currentAcount.movements.push(amount);
-    currentAcount.movementsDates.push(new Date());
-    updateUI(currentAcount);
-    rightInput(inputLoanAmount);
+    setTimeout(function () {
+      currentAcount.movements.push(amount);
+      currentAcount.movementsDates.push(new Date());
+      updateUI(currentAcount);
+      rightInput(inputLoanAmount);
+    }, 3000);
   } else {
     wrongInput(inputLoanAmount);
   }
