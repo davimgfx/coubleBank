@@ -326,7 +326,7 @@ h2 {
     margin: auto;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 540px) {
   .summary {
     flex-direction: column;
     justify-content: center;
@@ -335,16 +335,18 @@ h2 {
   .summary__value {
     margin-right: 0rem;
   }
+  .summary .btn--sort {
+    display: block;
+    padding: 1rem 1rem;
+    margin: 2rem auto;
+  }
+}
+@media (max-width: 480px) {
   .movements {
     width: 100%;
   }
   .operation {
     width: 80%;
-  }
-  .btn--sort {
-    display: block;
-    padding: 1rem 1rem;
-    margin: auto;
   }
 }
 @media (max-width: 440px) {

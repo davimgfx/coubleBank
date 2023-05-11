@@ -49,26 +49,30 @@
   }
 }
 
-@media (max-width: 480px) {
-  .summary {
+@media(max-width: 540px){
+  .summary{
     flex-direction: column;
     justify-content: center;
     align-items: center;
     &__value {
       margin-right: 0rem;
     }
+    .btn--sort {
+      display: block;
+      padding: 1rem 1rem;
+      margin: 2rem auto;
+    }
   }
+}
+
+@media (max-width: 480px) {
   .movements {
     width: 100%;
   }
   .operation {
     width: 80%;
   }
-  .btn--sort {
-    display: block;
-    padding: 1rem 1rem;
-    margin: auto;
-  }
+
 }
 
 @media (max-width: 440px) {
@@ -81,10 +85,12 @@
   .app {
     margin-top: 12rem;
   }
+  
 }
 
 @media (max-width: 350px) {
   .app {
     margin-top: 15rem;
   }
+  
 }
