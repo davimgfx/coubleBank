@@ -16,19 +16,19 @@ html {
 }
 
 body {
-  color: #150e2e;
-  background: #fff;
+  color: #fff;
+  background: #010510;
 }
 
 .login__btn {
   font-size: 2.4rem;
-  color: #000000;
+  color: #fff;
   cursor: pointer;
   transform: translateY(0.5rem);
   transition: 0.5s ease;
 }
 .login__btn:hover {
-  color: #363949;
+  transform: translateY(0);
 }
 
 .btn--sort {
@@ -64,6 +64,7 @@ body {
 }
 
 .login__input {
+  color: #363949;
   border: none;
   padding: 0.5rem 2rem;
   font-size: 1.6rem;
@@ -72,13 +73,12 @@ body {
   width: 12rem;
   border-radius: 10rem;
   margin-right: 1rem;
-  color: inherit;
   border: 1px solid #fff;
   transition: all 0.3s;
 }
 .login__input:focus {
   outline: none;
-  border: 1px solid #363949;
+  border: 1px solid #fff;
 }
 .login__input::placeholder {
   color: #363949;
@@ -280,7 +280,7 @@ h2 {
 
 .welcome {
   font-size: 1.8rem;
-  color: #000000;
+  color: #fff;
   font-weight: 600;
   cursor: default;
   margin-right: auto;
@@ -299,6 +299,32 @@ h2 {
 }
 
 /* BREAKPOINTS */
+.logo {
+  height: 3rem;
+  margin-right: 2rem;
+}
+
+.white__gradient {
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(750px);
+  position: absolute;
+  z-index: 1;
+  width: 20%;
+  height: 30%;
+  top: 0;
+}
+
+.pink__gradient {
+  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
+  filter: blur(900px);
+  position: absolute;
+  z-index: 2;
+  width: 40%;
+  height: 30%;
+  bottom: 10%;
+  left: 20%;
+}
+
 @media (max-width: 1120px) {
   html {
     font-size: 55%;
@@ -324,6 +350,11 @@ h2 {
   .summary,
   .logout-timer {
     margin: auto;
+  }
+}
+@media (max-width: 680px) {
+  .welcome {
+    display: none;
   }
 }
 @media (max-width: 540px) {

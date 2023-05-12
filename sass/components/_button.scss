@@ -1,11 +1,11 @@
 .login__btn {
 	font-size: 2.4rem;
-	color: $color-primary;
+	color: $color-white;
 	cursor: pointer;
 	transform: translateY(0.5rem);
 	transition: 0.5s ease;
 	&:hover {
-		color: $color-info-dark;
+		transform: translateY(0)
 	}
 }
 
