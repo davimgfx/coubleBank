@@ -24,7 +24,12 @@ import {
 
 import { accounts } from "./accounts.js";
 
-import { rightInput, wrongInput, createUsernames, formatMovementDate} from "./functions.js";
+import {
+  rightInput,
+  wrongInput,
+  createUsernames,
+  formatMovementDate,
+} from "./functions.js";
 
 //Display Movement
 const displayMovement = function (acc, sort = false) {
@@ -55,7 +60,6 @@ const displayMovement = function (acc, sort = false) {
 
 //Computing Usernames
 createUsernames(accounts);
-
 
 //Update UI
 const updateUI = function (acc) {
