@@ -1,4 +1,4 @@
-
+"use strict";
 const account1 = {
   owner: "João Schut",
   movements: [200, 450.81, -400.8, 3000, -650, -130.01, 70, 1300],
@@ -90,6 +90,12 @@ const account5 = {
   locale: "pt-PT",
 };
 
+fetch("../accounts.json")
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(Object.values(data.accounts));
+  });
+
 const accounts = [account1, account2, account3, account4, account5];
 
-export {accounts};
+export { accounts };
