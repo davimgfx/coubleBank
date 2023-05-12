@@ -20,6 +20,11 @@ body {
   background: #010510;
 }
 
+.logo {
+  height: 3rem;
+  margin-right: 2rem;
+}
+
 .login__btn {
   font-size: 2.4rem;
   color: #fff;
@@ -265,6 +270,27 @@ h2 {
   transition: all 1s;
 }
 
+.white__gradient {
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(750px);
+  position: absolute;
+  z-index: 1;
+  width: 20%;
+  height: 30%;
+  top: 0;
+}
+
+.pink__gradient {
+  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
+  filter: blur(900px);
+  position: absolute;
+  z-index: 2;
+  width: 40%;
+  height: 30%;
+  bottom: 10%;
+  left: 20%;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -299,32 +325,6 @@ h2 {
 }
 
 /* BREAKPOINTS */
-.logo {
-  height: 3rem;
-  margin-right: 2rem;
-}
-
-.white__gradient {
-  background: rgba(255, 255, 255, 0.6);
-  filter: blur(750px);
-  position: absolute;
-  z-index: 1;
-  width: 20%;
-  height: 30%;
-  top: 0;
-}
-
-.pink__gradient {
-  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
-  filter: blur(900px);
-  position: absolute;
-  z-index: 2;
-  width: 40%;
-  height: 30%;
-  bottom: 10%;
-  left: 20%;
-}
-
 @media (max-width: 1120px) {
   html {
     font-size: 55%;
@@ -355,6 +355,17 @@ h2 {
 @media (max-width: 680px) {
   .welcome {
     display: none;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .movements__row {
+    padding: 2.25rem 1rem;
+  }
+  .movements__type {
+    margin-right: 0.5rem;
   }
 }
 @media (max-width: 540px) {
@@ -389,6 +400,9 @@ h2 {
   }
   .app {
     margin-top: 12rem;
+  }
+  .movements__row {
+    padding: 2.25rem 1rem;
   }
 }
 @media (max-width: 350px) {
