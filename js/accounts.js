@@ -90,12 +90,6 @@ const account5 = {
   locale: "pt-PT",
 };
 
-fetch("../accounts.json")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(Object.values(data.accounts));
-  });
-
 const accounts = [account1, account2, account3, account4, account5];
 
 export { accounts };
