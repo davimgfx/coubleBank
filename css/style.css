@@ -347,8 +347,11 @@ h2 {
     width: 60%;
     margin: auto;
   }
-  .summary,
-  .logout-timer {
+  .form__input, .form__btn {
+    display: block;
+    z-index: 100;
+  }
+  .summary {
     margin: auto;
   }
 }

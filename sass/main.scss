@@ -42,9 +42,12 @@
     width: 60%;
     margin: auto;
   }
-
-  .summary,
-  .logout-timer {
+  .form__input{
+    display: block;
+    z-index: 100;
+  }
+  
+  .summary{
     margin: auto;
   }
 }
