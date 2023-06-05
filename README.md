@@ -20,4 +20,10 @@ If you want to test it, use the demo accounts:
 * user: **ss**, PIN: **4444**;  (en-US)
 * user: **test**, PIN: **1234**. (pt-PT)
 
+## Screenshots of the Project
+### Login page
+![Login_page](https://github.com/davimgfx/loginHoobank/assets/118557337/e71beae4-cf59-416a-9e99-6768a2eff3d0)
+### Landing page
+![Landing_page](https://github.com/davimgfx/loginHoobank/assets/118557337/c1682604-ec4a-498d-ae17-66d836dfc663)
+
 *In this project, BRL, USD, and EUR have the same value*
