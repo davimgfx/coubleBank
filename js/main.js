@@ -31,6 +31,10 @@ import {
   formatMovementDate,
 } from "./functions.js";
 
+//Test login
+document.querySelector(".login__input--user").value = "js"
+document.querySelector(".login__input--pin").value = "1111"
+
 //Display Movement
 const displayMovement = function (acc, sort = false) {
   containerMovements.innerHTML = "";
